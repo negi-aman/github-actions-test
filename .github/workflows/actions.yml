@@ -2,11 +2,19 @@ name: actions Workflow
 
 on:
   push:
+    branches:
+      - main
+  #repository_dispatch:
   schedule:
     - cron: "0/2 * * * *"
     - cron: "0/5 * * * *"
 
   pull_request:
+    branches:
+      - main
+      # - 'feature/*' #matches feature/feat1, feature/feat2 and it doesn’t match feature/feat3/test, To match this we use double * 
+      # - 'feature/**'
+      # - '!feature/feat4' #ignore this matching brach 
     types: [closed, assigned, opened, reopened]
 
 jobs:
