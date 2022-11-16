@@ -15,7 +15,12 @@ on:
       # - 'feature/*' #matches feature/feat1, feature/feat2 and it doesn’t match feature/feat3/test, To match this we use double * 
       # - 'feature/**'
       # - '!feature/feat4' #ignore this matching brach 
-    types: [closed, assigned, opened, reopened]
+    #types: [closed, assigned, opened, reopened]
+    # tags:
+    #   - v1.*
+    # paths:
+    #   - "**.js"
+    #   - "!filename.js"
 
 jobs:
   run-github-actions:
@@ -28,3 +33,12 @@ jobs:
           who-to-greet: Aman
       - name: Log Greetting Time
         run: echo "${{steps.greet.outputs.time}}"
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "17.x"
+      - run: npm ci 
